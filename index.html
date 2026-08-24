@@ -763,35 +763,10 @@ a { color: var(--color-link, var(--color-primary)); }</style>
                 <p>This link appears to be missing your identity. Please use the personalized link from your invitation email.</p>
             </div>
 
-            <form id="registrationForm">
-                <div class="form-group">
-                    <label>Customer Full Name <span class="required">*</span></label>
-                    <input type="text" id="customerName" placeholder="e.g. David Cohen" required="">
-                </div>
-                <div class="form-group">
-                    <label>Title / Role <span class="required">*</span></label>
-                    <input type="text" id="customerTitle" placeholder="e.g. VP Engineering, CTO" required="">
-                </div>
-                <div class="form-group">
-                    <label>Company <span class="required">*</span></label>
-                    <input type="text" id="customerCompany" placeholder="e.g. Acme Technologies" required="">
-                </div>
-                <div class="form-group">
-                    <label>Email <span class="required">*</span></label>
-                    <input type="email" id="customerEmail" placeholder="e.g. david@acme.com" required="">
-                </div>
-
-                <button type="submit" class="submit-btn" id="submitBtn">Reserve a Spot</button>
-                <div class="error-message" id="errorMessage"></div>
-            </form>
-        </div>
-
-        <!-- Success -->
-        <div class="success-message" id="successMessage">
-            <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"></path></svg>
-            <h3>Spot Reserved Successfully!</h3>
-            <p>The customer has been registered for the roundtable. An official invitation will be sent to them shortly.</p>
-            <button class="add-another-btn" id="addAnotherBtn">+ Register Another Customer</button>
+            <div id="registrationForm">
+                <p style="font-size: 14px; color: rgba(255,255,255,0.7); margin-bottom: 20px;">Click below to open the registration form and nominate your customer for a spot at the roundtable.</p>
+                <button class="submit-btn" id="submitBtn">Reserve a Spot →</button>
+            </div>
         </div>
     </div>
 
@@ -801,29 +776,23 @@ a { color: var(--color-link, var(--color-primary)); }</style>
 
     <script>
         // ============================================================
-        // CONFIGURATION - Replace this URL with your Power Automate
-        // HTTP trigger URL
+        // CONFIGURATION
         // ============================================================
-        const POWER_AUTOMATE_URL = 'https://c911f3cb3286ea9b82e8e8a0bf7f71.18.environment.api.powerplatform.com:443/powerautomate/automations/direct/cu/23/workflows/223e409e30d4493a9e9260d2e6e04abe/triggers/manual/paths/invoke?api-version=1';
+        const MS_FORMS_URL = 'https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=ShCAUi1HOEWczx4dDv6LG_lkaXf0PqVLvH4Ryzv-oJ1UM1FMVFZCN0RVM0pXTUtUTEpNOTE3SFVDVC4u';
 
         // ============================================================
-        // Parse AM identity from URL parameters
-        // Expected URL format:
-        // https://yourpage.com?am_name=John+Smith&am_email=jsmith@amazon.com
+        // Parse AM identity from URL parameters (for display only)
+        // URL format: https://yourpage.com?am_name=John+Smith&am_email=jsmith@amazon.com
         // ============================================================
         const urlParams = new URLSearchParams(window.location.search);
         const amName = urlParams.get('am_name');
         const amEmail = urlParams.get('am_email');
 
-        const formCard = document.getElementById('formCard');
-        const registrationForm = document.getElementById('registrationForm');
-        const missingParams = document.getElementById('missingParams');
         const amInfo = document.getElementById('amInfo');
         const amDisplayName = document.getElementById('amDisplayName');
-        const successMessage = document.getElementById('successMessage');
-        const errorMessage = document.getElementById('errorMessage');
+        const missingParams = document.getElementById('missingParams');
+        const registrationForm = document.getElementById('registrationForm');
         const submitBtn = document.getElementById('submitBtn');
-        const addAnotherBtn = document.getElementById('addAnotherBtn');
 
         // Validate AM parameters
         if (!amName || !amEmail) {
@@ -834,59 +803,10 @@ a { color: var(--color-link, var(--color-primary)); }</style>
             amDisplayName.textContent = `${amName} (${amEmail})`;
         }
 
-        // Form submission
-        registrationForm.addEventListener('submit', async function(e) {
+        // Redirect to Microsoft Forms on button click
+        submitBtn.addEventListener('click', function(e) {
             e.preventDefault();
-            errorMessage.style.display = 'none';
-            submitBtn.disabled = true;
-            submitBtn.textContent = 'Submitting...';
-
-            const payload = {
-                customer_name: document.getElementById('customerName').value.trim(),
-                customer_title: document.getElementById('customerTitle').value.trim(),
-                customer_company: document.getElementById('customerCompany').value.trim(),
-                customer_email: document.getElementById('customerEmail').value.trim(),
-                invitation_sent: '',
-                accepted_not_accepted: '',
-                am_name: amName,
-                am_email: amEmail,
-            };
-
-            try {
-                const response = await fetch(POWER_AUTOMATE_URL, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(payload)
-                });
-
-                if (response.ok || response.status === 202) {
-                    // Show success
-                    formCard.querySelector('h2').style.display = 'none';
-                    formCard.querySelector('.form-subtitle').style.display = 'none';
-                    amInfo.style.display = 'none';
-                    registrationForm.style.display = 'none';
-                    successMessage.style.display = 'block';
-                } else {
-                    throw new Error(`Server responded with ${response.status}`);
-                }
-            } catch (error) {
-                errorMessage.textContent = 'Something went wrong. Please try again or contact the organizer.';
-                errorMessage.style.display = 'block';
-                submitBtn.disabled = false;
-                submitBtn.textContent = 'Reserve a Spot';
-            }
-        });
-
-        // Add another customer
-        addAnotherBtn.addEventListener('click', function() {
-            formCard.querySelector('h2').style.display = 'block';
-            formCard.querySelector('.form-subtitle').style.display = 'block';
-            amInfo.style.display = 'flex';
-            registrationForm.style.display = 'block';
-            successMessage.style.display = 'none';
-            registrationForm.reset();
-            submitBtn.disabled = false;
-            submitBtn.textContent = 'Reserve a Spot';
+            window.open(MS_FORMS_URL, '_blank');
         });
     </script>
 
