@@ -351,7 +351,6 @@ a { color: var(--color-link, var(--color-primary)); }</style>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AI Migration &amp; Modernization Roundtable | AWS Summit Tel Aviv 2026</title>
-    <link href="https://fonts.googleapis.com/css2?family=Amazon+Ember:wght@300;400;500;700&amp;display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -362,323 +361,221 @@ a { color: var(--color-link, var(--color-primary)); }</style>
         body {
             font-family: 'Amazon Ember', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             min-height: 100vh;
-            background: linear-gradient(135deg, #0a0e2a 0%, #1a1f4e 25%, #232f5f 50%, #1a1040 75%, #0d0d2b 100%);
+            background: #0f1020;
             color: #ffffff;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+            overflow-x: hidden;
+        }
+
+        /* Pixel animation background */
+        .pixel-bg {
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 60%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .pixel {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            opacity: 0;
+            animation: pixelFade 4s infinite;
+        }
+
+        @keyframes pixelFade {
+            0% { opacity: 0; transform: scale(0.5); }
+            20% { opacity: 0.8; transform: scale(1); }
+            80% { opacity: 0.8; transform: scale(1); }
+            100% { opacity: 0; transform: scale(0.5); }
         }
 
         /* Header */
         .header {
+            position: relative;
+            z-index: 10;
             width: 100%;
-            padding: 20px 40px;
+            padding: 16px 40px;
+            background: #161622;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
             display: flex;
             align-items: center;
             justify-content: space-between;
         }
 
         .aws-logo {
-            height: 32px;
+            height: 28px;
         }
 
-        .header-badge {
-            background: rgba(255, 153, 0, 0.15);
-            border: 1px solid rgba(255, 153, 0, 0.4);
-            color: #ff9900;
-            padding: 6px 14px;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: 500;
-            letter-spacing: 0.5px;
-            text-transform: uppercase;
-        }
-
-        /* Hero Section */
-        .hero {
-            text-align: center;
-            padding: 40px 20px 30px;
-            max-width: 800px;
-        }
-
-        .event-tag {
-            display: inline-block;
-            background: linear-gradient(135deg, #ff9900, #ffb84d);
-            color: #0a0e2a;
-            padding: 6px 16px;
-            border-radius: 4px;
-            font-size: 12px;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 20px;
-        }
-
-        .hero h1 {
-            font-size: 36px;
-            font-weight: 700;
-            line-height: 1.2;
-            margin-bottom: 12px;
-            background: linear-gradient(to right, #ffffff, #c8d6e5);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .hero .subtitle {
-            font-size: 18px;
-            color: rgba(255, 255, 255, 0.7);
-            font-weight: 300;
-            margin-bottom: 24px;
-        }
-
-        .event-details {
-            display: flex;
-            justify-content: center;
-            gap: 32px;
-            flex-wrap: wrap;
-            margin-bottom: 20px;
-        }
-
-        .event-detail {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            color: rgba(255, 255, 255, 0.85);
+        .nav-text {
+            color: rgba(255,255,255,0.7);
             font-size: 14px;
         }
 
-        .event-detail svg {
-            width: 18px;
-            height: 18px;
-            fill: #ff9900;
+        /* Breadcrumb */
+        .breadcrumb {
+            position: relative;
+            z-index: 10;
+            padding: 16px 40px;
+            font-size: 13px;
+            color: rgba(255,255,255,0.5);
         }
 
-        /* Divider */
-        .divider {
-            width: 80px;
-            height: 2px;
-            background: linear-gradient(to right, transparent, #ff9900, transparent);
-            margin: 10px auto 30px;
+        .breadcrumb a {
+            color: rgba(255,255,255,0.7);
+            text-decoration: underline;
         }
 
-        /* Description */
-        .description {
-            max-width: 680px;
-            text-align: center;
-            padding: 0 20px;
+        /* Main content */
+        .main {
+            position: relative;
+            z-index: 10;
+            padding: 20px 40px 60px;
+            max-width: 1200px;
+        }
+
+        /* Hero card */
+        .hero-card {
+            background: rgba(30, 32, 50, 0.85);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 12px;
+            padding: 48px;
+            max-width: 640px;
             margin-bottom: 40px;
         }
 
-        .description p {
-            font-size: 15px;
-            line-height: 1.7;
-            color: rgba(255, 255, 255, 0.75);
-        }
-
-        /* Form Section */
-        .form-container {
-            width: 100%;
-            max-width: 520px;
-            padding: 0 20px 60px;
-        }
-
-        .form-card {
-            background: rgba(255, 255, 255, 0.04);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 12px;
-            padding: 32px;
-            backdrop-filter: blur(10px);
-        }
-
-        .form-card h2 {
-            font-size: 20px;
-            font-weight: 600;
-            margin-bottom: 4px;
+        .hero-card h1 {
+            font-size: 38px;
+            font-weight: 400;
+            line-height: 1.2;
+            margin-bottom: 12px;
             color: #ffffff;
         }
 
-        .form-card .form-subtitle {
-            font-size: 13px;
-            color: rgba(255, 255, 255, 0.5);
+        .hero-card .date {
+            font-size: 18px;
+            color: rgba(255,255,255,0.6);
+            margin-bottom: 32px;
+        }
+
+        .register-btn {
+            display: inline-block;
+            padding: 12px 28px;
+            background: #ffffff;
+            color: #0f1020;
+            border: none;
+            border-radius: 24px;
+            font-size: 15px;
+            font-weight: 600;
+            font-family: inherit;
+            cursor: pointer;
+            text-decoration: none;
+            transition: transform 0.15s, box-shadow 0.15s;
+        }
+
+        .register-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 8px 24px rgba(255,255,255,0.15);
+        }
+
+        /* Info section */
+        .info-section {
+            background: linear-gradient(180deg, #1a1c30 0%, #0f1020 100%);
+            border-radius: 20px 20px 0 0;
+            padding: 60px 40px;
+            position: relative;
+            z-index: 10;
+            margin-top: 20px;
+        }
+
+        .info-section h2 {
+            font-size: 28px;
+            font-weight: 400;
             margin-bottom: 24px;
+            color: #ffffff;
         }
 
-        .form-group {
-            margin-bottom: 18px;
+        .info-section p {
+            font-size: 16px;
+            line-height: 1.7;
+            color: rgba(255,255,255,0.7);
+            max-width: 700px;
+            margin-bottom: 20px;
         }
 
-        .form-group label {
-            display: block;
-            font-size: 13px;
-            font-weight: 500;
-            color: rgba(255, 255, 255, 0.85);
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 32px;
+            max-width: 700px;
+        }
+
+        .info-item {
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 8px;
+            padding: 20px;
+        }
+
+        .info-item .label {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: rgba(255,255,255,0.4);
             margin-bottom: 6px;
         }
 
-        .form-group label .required {
-            color: #ff9900;
-        }
-
-        .form-group input {
-            width: 100%;
-            padding: 12px 16px;
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            border-radius: 8px;
-            background: rgba(255, 255, 255, 0.06);
+        .info-item .value {
+            font-size: 15px;
             color: #ffffff;
-            font-size: 14px;
-            font-family: inherit;
-            transition: border-color 0.2s, background 0.2s;
         }
 
-        .form-group input::placeholder {
-            color: rgba(255, 255, 255, 0.35);
-        }
-
-        .form-group input:focus {
-            outline: none;
-            border-color: #ff9900;
-            background: rgba(255, 153, 0, 0.05);
-        }
-
-        .form-group input:disabled {
-            opacity: 0.6;
-            cursor: not-allowed;
-        }
-
-        .am-info {
-            background: rgba(255, 153, 0, 0.08);
-            border: 1px solid rgba(255, 153, 0, 0.2);
+        /* AM Badge */
+        .am-badge {
+            position: relative;
+            z-index: 10;
+            margin: 0 40px 20px;
+            background: rgba(147, 51, 234, 0.12);
+            border: 1px solid rgba(147, 51, 234, 0.3);
             border-radius: 8px;
-            padding: 12px 16px;
-            margin-bottom: 24px;
-            display: flex;
+            padding: 12px 18px;
+            display: inline-flex;
             align-items: center;
             gap: 10px;
+            font-size: 13px;
+            color: rgba(255,255,255,0.8);
         }
 
-        .am-info svg {
+        .am-badge svg {
             width: 18px;
             height: 18px;
-            fill: #ff9900;
-            flex-shrink: 0;
+            fill: #a855f7;
         }
 
-        .am-info span {
-            font-size: 13px;
-            color: rgba(255, 255, 255, 0.8);
+        .am-badge strong {
+            color: #c084fc;
         }
 
-        .am-info strong {
-            color: #ff9900;
-        }
-
-        .submit-btn {
-            width: 100%;
-            padding: 14px 24px;
-            background: linear-gradient(135deg, #ff9900, #e88600);
-            color: #0a0e2a;
-            border: none;
-            border-radius: 8px;
-            font-size: 15px;
-            font-weight: 700;
-            font-family: inherit;
-            cursor: pointer;
-            transition: transform 0.15s, box-shadow 0.15s;
-            letter-spacing: 0.3px;
-        }
-
-        .submit-btn:hover {
-            transform: translateY(-1px);
-            box-shadow: 0 8px 24px rgba(255, 153, 0, 0.3);
-        }
-
-        .submit-btn:active {
-            transform: translateY(0);
-        }
-
-        .submit-btn:disabled {
-            opacity: 0.6;
-            cursor: not-allowed;
-            transform: none;
-            box-shadow: none;
-        }
-
-        /* Success Message */
-        .success-message {
-            display: none;
-            text-align: center;
-            padding: 24px;
-        }
-
-        .success-message svg {
-            width: 48px;
-            height: 48px;
-            fill: #4caf50;
-            margin-bottom: 16px;
-        }
-
-        .success-message h3 {
-            font-size: 18px;
-            margin-bottom: 8px;
-            color: #ffffff;
-        }
-
-        .success-message p {
-            font-size: 14px;
-            color: rgba(255, 255, 255, 0.7);
-        }
-
-        .add-another-btn {
-            margin-top: 20px;
-            padding: 10px 20px;
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            color: #ffffff;
-            border-radius: 8px;
-            font-size: 13px;
-            font-weight: 500;
-            font-family: inherit;
-            cursor: pointer;
-            transition: background 0.2s;
-        }
-
-        .add-another-btn:hover {
-            background: rgba(255, 255, 255, 0.15);
-        }
-
-        /* Error */
-        .error-message {
-            display: none;
-            background: rgba(244, 67, 54, 0.1);
-            border: 1px solid rgba(244, 67, 54, 0.3);
-            border-radius: 8px;
-            padding: 12px 16px;
-            margin-top: 12px;
-            font-size: 13px;
-            color: #ff6b6b;
-        }
-
-        /* Footer */
-        .footer {
-            text-align: center;
-            padding: 20px;
-            font-size: 12px;
-            color: rgba(255, 255, 255, 0.4);
-        }
-
-        /* Missing AM params warning */
+        /* Missing params warning */
         .missing-params {
             display: none;
+            position: relative;
+            z-index: 10;
+            margin: 40px;
             text-align: center;
-            padding: 40px 20px;
+            padding: 40px;
+            background: rgba(30,32,50,0.85);
+            border-radius: 12px;
+            border: 1px solid rgba(255,255,255,0.08);
         }
 
         .missing-params svg {
             width: 48px;
             height: 48px;
-            fill: #ff9900;
+            fill: #a855f7;
             margin-bottom: 16px;
         }
 
@@ -689,87 +586,106 @@ a { color: var(--color-link, var(--color-primary)); }</style>
 
         .missing-params p {
             font-size: 14px;
-            color: rgba(255, 255, 255, 0.6);
+            color: rgba(255,255,255,0.6);
+        }
+
+        /* Footer */
+        .footer {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            padding: 30px 20px;
+            font-size: 12px;
+            color: rgba(255,255,255,0.3);
         }
 
         @media (max-width: 600px) {
-            .hero h1 {
+            .hero-card {
+                padding: 32px 24px;
+            }
+            .hero-card h1 {
                 font-size: 26px;
             }
-            .form-card {
-                padding: 24px 20px;
+            .main, .info-section, .breadcrumb, .header {
+                padding-left: 20px;
+                padding-right: 20px;
             }
-            .event-details {
-                gap: 16px;
+            .am-badge {
+                margin-left: 20px;
+                margin-right: 20px;
             }
         }
     </style>
 </head>
 <body>
 
+    <!-- Pixel background -->
+    <div class="pixel-bg" id="pixelBg"></div>
+
     <!-- Header -->
     <div class="header">
         <svg class="aws-logo" viewBox="0 0 304 182" xmlns="http://www.w3.org/2000/svg">
-            <path fill="#FF9900" d="M86.4 66.4c0 3.7.4 6.7 1.1 8.9.8 2.2 1.8 4.6 3.2 7.2.5.8.7 1.6.7 2.3 0 1-.6 2-1.9 3l-6.3 4.2c-.9.6-1.8.9-2.6.9-1 0-2-.5-3-1.4-1.4-1.5-2.6-3.1-3.6-4.7-1-1.7-2-3.6-3.1-5.9-7.8 9.2-17.6 13.8-29.4 13.8-8.4 0-15.1-2.4-20-7.2-4.9-4.8-7.4-11.2-7.4-19.2 0-8.5 3-15.4 9.1-20.6 6.1-5.2 14.2-7.8 24.5-7.8 3.4 0 6.9.3 10.6.8 3.7.5 7.5 1.3 11.5 2.2v-7.3c0-7.6-1.6-12.9-4.7-16-3.2-3.1-8.6-4.6-16.3-4.6-3.5 0-7.1.4-10.8 1.3-3.7.9-7.3 2-10.8 3.4-1.6.7-2.8 1.1-3.5 1.3-.7.2-1.2.3-1.6.3-1.4 0-2.1-1-2.1-3.1v-4.9c0-1.6.2-2.8.7-3.5.5-.7 1.4-1.4 2.8-2.1 3.5-1.8 7.7-3.3 12.6-4.5 4.9-1.3 10.1-1.9 15.6-1.9 11.9 0 20.6 2.7 26.2 8.1 5.5 5.4 8.3 13.6 8.3 24.6v32.4h.1zM45.8 81.6c3.3 0 6.7-.6 10.3-1.8 3.6-1.2 6.8-3.4 9.5-6.4 1.6-1.9 2.8-4 3.4-6.4.6-2.4 1-5.3 1-8.7v-4.2c-2.9-.7-6-1.3-9.2-1.7-3.2-.4-6.3-.6-9.4-.6-6.7 0-11.6 1.3-14.9 4-3.3 2.7-4.9 6.5-4.9 11.5 0 4.7 1.2 8.2 3.7 10.6 2.4 2.5 5.9 3.7 10.5 3.7zm80.3 10.8c-1.8 0-3-.3-3.8-1-.8-.6-1.5-2-2.1-3.9l-23.5-77.3c-.6-2-1-3.3-1-4.1 0-1.6.8-2.5 2.4-2.5h9.8c1.9 0 3.2.3 3.9 1 .8.6 1.4 2 2 3.9l16.8 66.2 15.6-66.2c.5-2 1.1-3.3 1.9-3.9.8-.6 2.2-1 4-1h8c1.9 0 3.2.3 4 1 .8.6 1.5 2 1.9 3.9l15.8 67 17.3-67c.6-2 1.3-3.3 2-3.9.8-.6 2.1-1 3.9-1h9.3c1.6 0 2.5.8 2.5 2.5 0 .5-.1 1-.2 1.6-.1.6-.3 1.4-.7 2.5l-24.1 77.3c-.6 2-1.3 3.3-2.1 3.9-.8.6-2.1 1-3.8 1h-8.6c-1.9 0-3.2-.3-4-1-.8-.7-1.5-2-1.9-4l-15.5-64.5-15.4 64.4c-.5 2-1.1 3.3-1.9 4-.8.7-2.2 1-4 1h-8.6zm128.5 2.7c-5.2 0-10.4-.6-15.4-1.8-5-1.2-8.9-2.5-11.5-4-1.6-.9-2.7-1.9-3.1-2.8-.4-.9-.6-1.9-.6-2.8v-5.1c0-2.1.8-3.1 2.3-3.1.6 0 1.2.1 1.8.3.6.2 1.5.6 2.5 1 3.4 1.5 7.1 2.7 11 3.5 4 .8 7.9 1.2 11.9 1.2 6.3 0 11.2-1.1 14.6-3.3 3.4-2.2 5.2-5.4 5.2-9.5 0-2.8-.9-5.1-2.7-7-1.8-1.9-5.2-3.6-10.1-5.2l-14.5-4.5c-7.3-2.3-12.7-5.7-16-10.2-3.3-4.4-5-9.3-5-14.5 0-4.2.9-7.9 2.7-11.1 1.8-3.2 4.2-6 7.2-8.2 3-2.3 6.4-4 10.4-5.2 4-1.2 8.2-1.7 12.6-1.7 2.2 0 4.5.1 6.7.4 2.3.3 4.4.7 6.5 1.1 2 .5 3.9 1 5.7 1.6 1.8.6 3.2 1.2 4.2 1.8 1.4.8 2.4 1.6 3 2.5.6.8.9 1.9.9 3.3v4.7c0 2.1-.8 3.2-2.3 3.2-.8 0-2.1-.4-3.8-1.2-5.7-2.6-12.1-3.9-19.2-3.9-5.7 0-10.2.9-13.3 2.8-3.1 1.9-4.7 4.8-4.7 8.9 0 2.8 1 5.2 3 7.1 2 1.9 5.7 3.8 11 5.5l14.2 4.5c7.2 2.3 12.4 5.5 15.5 9.6 3.1 4.1 4.6 8.8 4.6 14 0 4.3-.9 8.2-2.6 11.6-1.8 3.4-4.2 6.4-7.3 8.8-3.1 2.5-6.8 4.3-11.1 5.6-4.5 1.4-9.2 2.1-14.3 2.1z"></path>
+            <path fill="#ffffff" d="M86.4 66.4c0 3.7.4 6.7 1.1 8.9.8 2.2 1.8 4.6 3.2 7.2.5.8.7 1.6.7 2.3 0 1-.6 2-1.9 3l-6.3 4.2c-.9.6-1.8.9-2.6.9-1 0-2-.5-3-1.4-1.4-1.5-2.6-3.1-3.6-4.7-1-1.7-2-3.6-3.1-5.9-7.8 9.2-17.6 13.8-29.4 13.8-8.4 0-15.1-2.4-20-7.2-4.9-4.8-7.4-11.2-7.4-19.2 0-8.5 3-15.4 9.1-20.6 6.1-5.2 14.2-7.8 24.5-7.8 3.4 0 6.9.3 10.6.8 3.7.5 7.5 1.3 11.5 2.2v-7.3c0-7.6-1.6-12.9-4.7-16-3.2-3.1-8.6-4.6-16.3-4.6-3.5 0-7.1.4-10.8 1.3-3.7.9-7.3 2-10.8 3.4-1.6.7-2.8 1.1-3.5 1.3-.7.2-1.2.3-1.6.3-1.4 0-2.1-1-2.1-3.1v-4.9c0-1.6.2-2.8.7-3.5.5-.7 1.4-1.4 2.8-2.1 3.5-1.8 7.7-3.3 12.6-4.5 4.9-1.3 10.1-1.9 15.6-1.9 11.9 0 20.6 2.7 26.2 8.1 5.5 5.4 8.3 13.6 8.3 24.6v32.4h.1zM45.8 81.6c3.3 0 6.7-.6 10.3-1.8 3.6-1.2 6.8-3.4 9.5-6.4 1.6-1.9 2.8-4 3.4-6.4.6-2.4 1-5.3 1-8.7v-4.2c-2.9-.7-6-1.3-9.2-1.7-3.2-.4-6.3-.6-9.4-.6-6.7 0-11.6 1.3-14.9 4-3.3 2.7-4.9 6.5-4.9 11.5 0 4.7 1.2 8.2 3.7 10.6 2.4 2.5 5.9 3.7 10.5 3.7zm80.3 10.8c-1.8 0-3-.3-3.8-1-.8-.6-1.5-2-2.1-3.9l-23.5-77.3c-.6-2-1-3.3-1-4.1 0-1.6.8-2.5 2.4-2.5h9.8c1.9 0 3.2.3 3.9 1 .8.6 1.4 2 2 3.9l16.8 66.2 15.6-66.2c.5-2 1.1-3.3 1.9-3.9.8-.6 2.2-1 4-1h8c1.9 0 3.2.3 4 1 .8.6 1.5 2 1.9 3.9l15.8 67 17.3-67c.6-2 1.3-3.3 2-3.9.8-.6 2.1-1 3.9-1h9.3c1.6 0 2.5.8 2.5 2.5 0 .5-.1 1-.2 1.6-.1.6-.3 1.4-.7 2.5l-24.1 77.3c-.6 2-1.3 3.3-2.1 3.9-.8.6-2.1 1-3.8 1h-8.6c-1.9 0-3.2-.3-4-1-.8-.7-1.5-2-1.9-4l-15.5-64.5-15.4 64.4c-.5 2-1.1 3.3-1.9 4-.8.7-2.2 1-4 1h-8.6zm128.5 2.7c-5.2 0-10.4-.6-15.4-1.8-5-1.2-8.9-2.5-11.5-4-1.6-.9-2.7-1.9-3.1-2.8-.4-.9-.6-1.9-.6-2.8v-5.1c0-2.1.8-3.1 2.3-3.1.6 0 1.2.1 1.8.3.6.2 1.5.6 2.5 1 3.4 1.5 7.1 2.7 11 3.5 4 .8 7.9 1.2 11.9 1.2 6.3 0 11.2-1.1 14.6-3.3 3.4-2.2 5.2-5.4 5.2-9.5 0-2.8-.9-5.1-2.7-7-1.8-1.9-5.2-3.6-10.1-5.2l-14.5-4.5c-7.3-2.3-12.7-5.7-16-10.2-3.3-4.4-5-9.3-5-14.5 0-4.2.9-7.9 2.7-11.1 1.8-3.2 4.2-6 7.2-8.2 3-2.3 6.4-4 10.4-5.2 4-1.2 8.2-1.7 12.6-1.7 2.2 0 4.5.1 6.7.4 2.3.3 4.4.7 6.5 1.1 2 .5 3.9 1 5.7 1.6 1.8.6 3.2 1.2 4.2 1.8 1.4.8 2.4 1.6 3 2.5.6.8.9 1.9.9 3.3v4.7c0 2.1-.8 3.2-2.3 3.2-.8 0-2.1-.4-3.8-1.2-5.7-2.6-12.1-3.9-19.2-3.9-5.7 0-10.2.9-13.3 2.8-3.1 1.9-4.7 4.8-4.7 8.9 0 2.8 1 5.2 3 7.1 2 1.9 5.7 3.8 11 5.5l14.2 4.5c7.2 2.3 12.4 5.5 15.5 9.6 3.1 4.1 4.6 8.8 4.6 14 0 4.3-.9 8.2-2.6 11.6-1.8 3.4-4.2 6.4-7.3 8.8-3.1 2.5-6.8 4.3-11.1 5.6-4.5 1.4-9.2 2.1-14.3 2.1z"></path>
             <path fill="#FF9900" d="M273.5 143.7c-32.9 24.3-80.7 37.2-121.8 37.2-57.6 0-109.5-21.3-148.7-56.7-3.1-2.8-.3-6.6 3.4-4.4 42.4 24.6 94.7 39.5 148.8 39.5 36.5 0 76.6-7.6 113.5-23.2 5.5-2.5 10.2 3.6 4.8 7.6z"></path>
             <path fill="#FF9900" d="M287.2 128.1c-4.2-5.4-27.8-2.6-38.5-1.3-3.2.4-3.7-2.4-.8-4.5 18.8-13.2 49.7-9.4 53.3-5 3.6 4.5-1 35.4-18.6 50.2-2.7 2.3-5.3 1.1-4.1-1.9 4-9.9 12.9-32.2 8.7-37.5z"></path>
         </svg>
-        <span class="header-badge">Exclusive Roundtable</span>
+        <span class="nav-text">AWS Summit Tel Aviv</span>
     </div>
 
-    <!-- Hero -->
-    <div class="hero">
-        <div class="event-tag">AWS Summit Tel Aviv 2026</div>
-        <h1>AI Migration &amp; Modernization Roundtable</h1>
-        <p class="subtitle">An exclusive executive discussion on accelerating cloud modernization with AI</p>
-        <div class="event-details">
-            <div class="event-detail">
-                <svg viewBox="0 0 24 24"><path d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V9h14v11z"></path></svg>
-                <span>September 10, 2026</span>
-            </div>
-            <div class="event-detail">
-                <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"></path></svg>
-                <span>Expo Tel Aviv</span>
-            </div>
-            <div class="event-detail">
-                <svg viewBox="0 0 24 24"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"></path></svg>
-                <span>Invitation Only</span>
-            </div>
-        </div>
-        <div class="divider"></div>
+    <!-- Breadcrumb -->
+    <div class="breadcrumb">
+        <a href="https://aws.amazon.com/events/">Events</a> › <a href="https://aws.amazon.com/events/summits/">AWS Summits</a> › AWS Summit Tel Aviv › Roundtable
     </div>
 
-    <!-- Description -->
-    <div class="description">
-        <p>Join AWS and industry leaders for an intimate roundtable discussion on how AI is transforming infrastructure migration and application modernization. This exclusive session brings together senior technology executives to share strategies, challenges, and real-world outcomes in their cloud modernization journey.</p>
+    <!-- AM Badge -->
+    <div class="am-badge" id="amBadge">
+        <svg viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"></path></svg>
+        <span>Registering as: <strong id="amDisplayName">Loading...</strong></span>
     </div>
 
-    <!-- Form -->
-    <div class="form-container">
-        <div class="form-card" id="formCard">
-            <h2>Register a Customer</h2>
-            <p class="form-subtitle">Nominate a prospective customer to participate in this roundtable</p>
+    <!-- Missing params warning -->
+    <div class="missing-params" id="missingParams">
+        <svg viewBox="0 0 24 24"><path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"></path></svg>
+        <h3>Invalid Registration Link</h3>
+        <p>This link appears to be missing your identity. Please use the personalized link from your invitation email.</p>
+    </div>
 
-            <!-- AM Info (populated from URL params) -->
-            <div class="am-info" id="amInfo">
-                <svg viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"></path></svg>
-                <span>Registering as: <strong id="amDisplayName">Loading...</strong></span>
-            </div>
-
-            <!-- Missing params warning -->
-            <div class="missing-params" id="missingParams">
-                <svg viewBox="0 0 24 24"><path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"></path></svg>
-                <h3>Invalid Registration Link</h3>
-                <p>This link appears to be missing your identity. Please use the personalized link from your invitation email.</p>
-            </div>
-
-            <div id="registrationForm">
-                <p style="font-size: 14px; color: rgba(255,255,255,0.7); margin-bottom: 20px;">Click below to open the registration form and nominate your customer for a spot at the roundtable.</p>
-                <button class="submit-btn" id="submitBtn">Reserve a Spot →</button>
-            </div>
+    <!-- Hero Card -->
+    <div class="main" id="mainContent">
+        <div class="hero-card">
+            <h1>AI Migration &amp;<br>Modernization Roundtable</h1>
+            <p class="date">September 10, 2026 | Expo Tel Aviv</p>
+            <button class="register-btn" id="submitBtn">Register a customer</button>
         </div>
     </div>
 
+    <!-- Info Section -->
+    <div class="info-section">
+        <h2>About this Roundtable</h2>
+        <p>Join AWS and industry leaders for an intimate executive discussion on how AI is transforming infrastructure migration and application modernization. This exclusive session brings together senior technology executives to share strategies, challenges, and real-world outcomes in their cloud modernization journey.</p>
+        <p>Nominate your prospective customers to participate in this invitation-only roundtable.</p>
+
+        <div class="info-grid">
+            <div class="info-item">
+                <div class="label">Format</div>
+                <div class="value">Executive Roundtable</div>
+            </div>
+            <div class="info-item">
+                <div class="label">Audience</div>
+                <div class="value">CTO / VP Engineering</div>
+            </div>
+            <div class="info-item">
+                <div class="label">Access</div>
+                <div class="value">Invitation Only</div>
+            </div>
+            <div class="info-item">
+                <div class="label">Part Of</div>
+                <div class="value">AWS Summit Tel Aviv 2026</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
     <div class="footer">
         © 2026, Amazon Web Services, Inc. or its affiliates. All rights reserved.
     </div>
@@ -781,31 +697,47 @@ a { color: var(--color-link, var(--color-primary)); }</style>
         const MS_FORMS_URL = 'https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=ShCAUi1HOEWczx4dDv6LG_lkaXf0PqVLvH4Ryzv-oJ1UM1FMVFZCN0RVM0pXTUtUTEpNOTE3SFVDVC4u';
 
         // ============================================================
-        // Parse AM identity from URL parameters (for display only)
-        // URL format: https://yourpage.com?am_name=John+Smith&am_email=jsmith@amazon.com
+        // Generate pixel background
+        // ============================================================
+        const pixelBg = document.getElementById('pixelBg');
+        const colors = ['#7c3aed', '#a855f7', '#c026d3', '#db2777', '#e11d48', '#9333ea', '#6d28d9'];
+
+        for (let i = 0; i < 45; i++) {
+            const pixel = document.createElement('div');
+            pixel.className = 'pixel';
+            pixel.style.left = (30 + Math.random() * 65) + '%';
+            pixel.style.top = (5 + Math.random() * 85) + '%';
+            pixel.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+            pixel.style.animationDelay = (Math.random() * 6) + 's';
+            pixel.style.animationDuration = (3 + Math.random() * 3) + 's';
+            pixel.style.width = (12 + Math.random() * 16) + 'px';
+            pixel.style.height = pixel.style.width;
+            pixelBg.appendChild(pixel);
+        }
+
+        // ============================================================
+        // Parse AM identity from URL parameters
         // ============================================================
         const urlParams = new URLSearchParams(window.location.search);
         const amName = urlParams.get('am_name');
         const amEmail = urlParams.get('am_email');
 
-        const amInfo = document.getElementById('amInfo');
+        const amBadge = document.getElementById('amBadge');
         const amDisplayName = document.getElementById('amDisplayName');
         const missingParams = document.getElementById('missingParams');
-        const registrationForm = document.getElementById('registrationForm');
+        const mainContent = document.getElementById('mainContent');
         const submitBtn = document.getElementById('submitBtn');
 
-        // Validate AM parameters
         if (!amName || !amEmail) {
-            registrationForm.style.display = 'none';
-            amInfo.style.display = 'none';
+            mainContent.style.display = 'none';
+            amBadge.style.display = 'none';
             missingParams.style.display = 'block';
         } else {
-            amDisplayName.textContent = `${amName} (${amEmail})`;
+            amDisplayName.textContent = amName + ' (' + amEmail + ')';
         }
 
-        // Redirect to Microsoft Forms on button click
-        submitBtn.addEventListener('click', function(e) {
-            e.preventDefault();
+        // Redirect to Microsoft Forms
+        submitBtn.addEventListener('click', function() {
             window.open(MS_FORMS_URL, '_blank');
         });
     </script>
