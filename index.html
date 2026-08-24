@@ -442,8 +442,7 @@ a { color: var(--color-link, var(--color-primary)); }</style>
             border: 1px solid rgba(255,255,255,0.08);
             border-radius: 12px;
             padding: 48px;
-            max-width: 640px;
-            margin-bottom: 40px;
+            max-width: 680px;
         }
 
         .hero-card h1 {
@@ -455,8 +454,15 @@ a { color: var(--color-link, var(--color-primary)); }</style>
         }
 
         .hero-card .date {
-            font-size: 18px;
+            font-size: 16px;
             color: rgba(255,255,255,0.6);
+            margin-bottom: 28px;
+        }
+
+        .hero-card .description {
+            font-size: 15px;
+            line-height: 1.7;
+            color: rgba(255,255,255,0.7);
             margin-bottom: 32px;
         }
 
@@ -478,59 +484,6 @@ a { color: var(--color-link, var(--color-primary)); }</style>
         .register-btn:hover {
             transform: translateY(-1px);
             box-shadow: 0 8px 24px rgba(255,255,255,0.15);
-        }
-
-        /* Info section */
-        .info-section {
-            background: linear-gradient(180deg, #1a1c30 0%, #0f1020 100%);
-            border-radius: 20px 20px 0 0;
-            padding: 60px 40px;
-            position: relative;
-            z-index: 10;
-            margin-top: 20px;
-        }
-
-        .info-section h2 {
-            font-size: 28px;
-            font-weight: 400;
-            margin-bottom: 24px;
-            color: #ffffff;
-        }
-
-        .info-section p {
-            font-size: 16px;
-            line-height: 1.7;
-            color: rgba(255,255,255,0.7);
-            max-width: 700px;
-            margin-bottom: 20px;
-        }
-
-        .info-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
-            margin-top: 32px;
-            max-width: 700px;
-        }
-
-        .info-item {
-            background: rgba(255,255,255,0.04);
-            border: 1px solid rgba(255,255,255,0.08);
-            border-radius: 8px;
-            padding: 20px;
-        }
-
-        .info-item .label {
-            font-size: 11px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            color: rgba(255,255,255,0.4);
-            margin-bottom: 6px;
-        }
-
-        .info-item .value {
-            font-size: 15px;
-            color: #ffffff;
         }
 
         /* AM Badge */
@@ -606,7 +559,7 @@ a { color: var(--color-link, var(--color-primary)); }</style>
             .hero-card h1 {
                 font-size: 26px;
             }
-            .main, .info-section, .breadcrumb, .header {
+            .main, .breadcrumb, .header {
                 padding-left: 20px;
                 padding-right: 20px;
             }
@@ -654,34 +607,10 @@ a { color: var(--color-link, var(--color-primary)); }</style>
     <div class="main" id="mainContent">
         <div class="hero-card">
             <h1>AI Migration &amp;<br>Modernization Roundtable</h1>
-            <p class="date">September 10, 2026 | Expo Tel Aviv</p>
+            <p class="date">September 10, 2026, 12:00 – 13:00 | Expo Tel Aviv, Business Room 1</p>
+            <p class="description">Join AWS and industry leaders for an intimate executive discussion on how AI is transforming infrastructure migration and application modernization. This exclusive session brings together senior technology executives to share strategies, challenges, and real-world outcomes in their cloud modernization journey.</p>
+            <p class="description">Nominate your prospective customers to participate in this invitation-only roundtable.</p>
             <button class="register-btn" id="submitBtn">Register a customer</button>
-        </div>
-    </div>
-
-    <!-- Info Section -->
-    <div class="info-section">
-        <h2>About this Roundtable</h2>
-        <p>Join AWS and industry leaders for an intimate executive discussion on how AI is transforming infrastructure migration and application modernization. This exclusive session brings together senior technology executives to share strategies, challenges, and real-world outcomes in their cloud modernization journey.</p>
-        <p>Nominate your prospective customers to participate in this invitation-only roundtable.</p>
-
-        <div class="info-grid">
-            <div class="info-item">
-                <div class="label">Format</div>
-                <div class="value">Executive Roundtable</div>
-            </div>
-            <div class="info-item">
-                <div class="label">Audience</div>
-                <div class="value">CTO / VP Engineering</div>
-            </div>
-            <div class="info-item">
-                <div class="label">Access</div>
-                <div class="value">Invitation Only</div>
-            </div>
-            <div class="info-item">
-                <div class="label">Part Of</div>
-                <div class="value">AWS Summit Tel Aviv 2026</div>
-            </div>
         </div>
     </div>
 
